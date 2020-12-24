@@ -233,6 +233,16 @@ header {
 }
 
 
+.app{
+    width: 500px;
+    height: 530px;
+    margin: auto;
+    margin-top: 100px;   /*margin-left: auto;*/
+    align-items: center;
+    background: #e2e2e2;
+    border: solid 3px darkred;
+    border-radius: 20px;
+}
 
 
 

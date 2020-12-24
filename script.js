@@ -86,8 +86,6 @@ function createCurrencyElements(elements, root, inputName) {
   }
 }
 
-
-
 //from
 const parentEl = document.querySelector("#currency-box-from");
 const fromInputName = "currency_from";
@@ -100,7 +98,6 @@ createCurrencyElements(currencyKeys, parentToEl, toInputName);
 
 const calculateButton = document.querySelector("#calculate-button");
 
-
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
@@ -108,13 +105,13 @@ const calculateButton = document.querySelector("#calculate-button");
 const amountInput = document.getElementById("amountInput");
 
 calculateButton.addEventListener("click", function () {
-  let checkedFrom = document.querySelector("input[name='currency_from']:checked");
+  let checkedFrom = document.querySelector(
+    "input[name='currency_from']:checked"
+  );
   let checkedTo = document.querySelector("input[name='currency_to']:checked");
   let currencyFrom = document.querySelector("input[name='currency_from']");
   let currencyTo = document.querySelector("input[name='currency_to']");
-  const currencyResult = document.querySelector("#currency-result");
-  let selectedValueFrom;
-  let selectedValueTo;
+  const currencyResult = document.getElementById("currency-result");
 
   if (!checkedFrom && !checkedTo) {
     currencyResult.innerHTML = " Please select from both sides";
@@ -123,36 +120,21 @@ calculateButton.addEventListener("click", function () {
   } else if (!checkedTo) {
     currencyResult.innerHTML = " Please select a opposite currency";
   }
-  
 
-  for (let i = 0; i < checkedFrom.length; i++) {
-    if (checkedFrom[i].checked) {
-      selectedValueFrom = checkedFrom[i].value;
-      return selectedValueFrom;
-        
-    } 
-  }
-  
+  console.log(checkedFrom);
+  console.log(checkedTo);
 
-  for (let i = 0; i < checkedTo.length; i++) {
-    if (checkedTo[i].checked) {
-      selectedValueTo = checkedTo[i].value;
-      return selectedValueTo;
-    } 
-  }
-  
-
-  if (selectedValueFrom == selectedValueTo) {
-    alert("You have selected the same currencies");
-    currencyResult.innerHTML = " You have selected same currency on both sides";
-  }
-    
-
-  if (amountInput.value.length == 0 || amountInput.value == "") {
+  if (amountInput.value.length == 0) {
     alert("Please enter an input");
   } else {
     let numbers = /^[0-9]+$/;
     if (numbers.test(amountInput.value) == true) {
+      if (checkedFrom.value === checkedTo.value) {
+        alert("You have selected the same currencies");
+        //InnerHTML neden çalışmıyor...
+        currencyResult.innerHTML = " Same currency";
+        
+      }
       const fromTarget = document.querySelector(
         "input[name='currency_from']:checked"
       ).value;
@@ -172,4 +154,3 @@ calculateButton.addEventListener("click", function () {
     }
   }
 });
-
