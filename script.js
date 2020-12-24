@@ -121,8 +121,7 @@ calculateButton.addEventListener("click", function () {
     currencyResult.innerHTML = " Please select a opposite currency";
   }
 
-  console.log(checkedFrom);
-  console.log(checkedTo);
+  
 
   if (amountInput.value.length == 0) {
     alert("Please enter an input");
@@ -130,27 +129,26 @@ calculateButton.addEventListener("click", function () {
     let numbers = /^[0-9]+$/;
     if (numbers.test(amountInput.value) == true) {
       if (checkedFrom.value === checkedTo.value) {
-        alert("You have selected the same currencies");
-        //InnerHTML neden çalışmıyor...
-        currencyResult.innerHTML = " Same currency";
-        
+        currencyResult.innerHTML = "You have selected same currencies";
+      } else {
+        const fromTarget = document.querySelector(
+          "input[name='currency_from']:checked"
+        ).value;
+        const toTarget = document.querySelector(
+          "input[name='currency_to']:checked"
+        ).value;
+        // amountu alalim
+        const amount = document.querySelector("input[name='amount']").value;
+        const currentCurrencyObject = data[fromTarget];
+        const resultForOne = currentCurrencyObject[toTarget];
+        const result = amount * resultForOne;
+        const currencyResult = document.querySelector("#currency-result");
+        currencyResult.innerHTML =
+          amount + " " + fromTarget + " = " + result + " " + toTarget;
       }
-      const fromTarget = document.querySelector(
-        "input[name='currency_from']:checked"
-      ).value;
-      const toTarget = document.querySelector(
-        "input[name='currency_to']:checked"
-      ).value;
-      // amountu alalim
-      const amount = document.querySelector("input[name='amount']").value;
-      const currentCurrencyObject = data[fromTarget];
-      const resultForOne = currentCurrencyObject[toTarget];
-      const result = amount * resultForOne;
-      const currencyResult = document.querySelector("#currency-result");
-      currencyResult.innerHTML =
-        amount + " " + fromTarget + " = " + result + " " + toTarget;
     } else {
       alert("Please enter a number ");
     }
   }
 });
+

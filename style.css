@@ -179,7 +179,7 @@ header {
 }
 
 .currency-calculate button:hover{
-    transition: 0.7ms;
+    transition: 500ms;
     background: red;
 }
 
